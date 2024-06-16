@@ -1,5 +1,5 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
-const cron = require('node-cron');
+import cron from 'node-cron';
 import 'dotenv/config'
 
 const token = process.env.DISCORD_TOKEN
