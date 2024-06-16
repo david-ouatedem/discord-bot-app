@@ -1,8 +1,11 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
+import express from 'express'
 import cron from 'node-cron';
 import 'dotenv/config'
 
+const app = express()
 const token = process.env.DISCORD_TOKEN
+const port = process.env.PORT
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const generalChannelId = process.env.GENRAL_CHANNEL_ID
@@ -23,3 +26,12 @@ client.once(Events.ClientReady, readyClient => {
 
 
 client.login(token);
+
+
+app.get('/', (req, res) => {
+    res.send('Discord bot is running!');
+});
+
+app.listen(port, () => {
+    console.log(`Express server is listening on port ${port}`);
+});
