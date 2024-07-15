@@ -16,7 +16,7 @@ client.once(Events.ClientReady, readyClient => {
     cron.schedule(cronExpression, () => {
         const channel = client.channels.cache.get(generalChannelId??'');
         if (channel && channel.isTextBased() ) {
-            channel.send('This is your scheduled message.');
+            channel.send('Hey Dave don't forget to send your weekly objectifs.');
         } else {
             console.error('Channel not found');
         }
