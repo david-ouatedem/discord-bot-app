@@ -1,0 +1,34 @@
+name: Deploy Bot
+
+on:
+  push:
+    branches:
+      - main   
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: SSH into the server and deploy
+      uses: appleboy/ssh-action@v0.1.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }} 
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /apps/discord-bot-app/
+          git pull origin main
+          npm install
+          pm2 restart index.js
