@@ -4,7 +4,7 @@ import cron from "node-cron";
 import "dotenv/config";
 
 const app = express();
-const token = process.env.DISCORD_TOKEN || 3001;
+const token = process.env.DISCORD_TOKEN || 3002;
 const port = process.env.PORT;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
