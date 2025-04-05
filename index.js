@@ -4,17 +4,17 @@ import cron from "node-cron";
 import "dotenv/config";
 
 const app = express();
-const token = process.env.DISCORD_TOKEN || 3002;
+const token = process.env.DISCORD_TOKEN || 3001;
 const port = process.env.PORT;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-const generalChannelId = process.env.GENRAL_CHANNEL_ID;
+const channelId = process.env.CHANNEL_ID;
 const cronExpression = "0 15 * * 1,2"; // 0 15 * * 1,2 , * * * * *
 
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
   cron.schedule(cronExpression, () => {
-    const channel = client.channels.cache.get(generalChannelId ?? "");
+    const channel = client.channels.cache.get(channelId ?? "");
     if (channel && channel.isTextBased()) {
       channel.send("Hey Dave dont forget to send your weekly objectives");
     } else {
